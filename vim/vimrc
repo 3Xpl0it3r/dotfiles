@@ -1,0 +1,40 @@
+set timeoutlen=200
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set nocompatible
+
+" vim相关配置
+source ~/.vim/config.d/common.vim
+
+" 加载插件
+source ~/.vim/config.d/plugin.vim
+
+"加载主题
+source ~/.vim/config.d/theme.vim
+
+"which-key
+source ~/.vim/config.d/which-key.vim
+
+"coc 配置
+source ~/.vim/config.d/coc.vim
+"
+"floaterm配置
+source ~/.vim/config.d/floaterm.vim
+
+
+" indentline
+source ~/.vim/config.d/indent.vim
+
+" aireline config
+source ~/.vim/config.d/aireline.vim
+
+" markdown预览
+source ~/.vim/config.d/markdown.vim
+
+" vim golang
+source ~/.vim/config.d/vim-go.vim
+" rainbow
+" source ~/.vim/config.d/rainbow.vim
+" fzf
+source ~/.vim/config.d/fzf.vim
+
+

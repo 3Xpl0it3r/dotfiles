@@ -1,2 +1,1 @@
-# vim_backup
-personal vim config
+个人配置文件备份
