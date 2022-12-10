@@ -1,7 +1,8 @@
 local get_os_name = require("utils.get_os_name")
 
 if get_os_name.get_os_name() == "Windows" then
-   return { "pwsh.exe" }
+	return { "pwsh.exe" }
 else
-   return { "zsh" }
+	return {"/bin/zsh", "-c", "/usr/local/bin/zellij"}
+	-- return { "/bin/zsh", "-c", "zellij" }
 end

@@ -87,7 +87,7 @@ return {
 	},
 
 	-- shells
-	-- default_prog = shell,
+	default_prog = shell,
 	launch_menu = launch_menu,
 
 	-- ssh

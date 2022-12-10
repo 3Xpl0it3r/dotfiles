@@ -195,7 +195,7 @@ plugins {
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-// default_shell "fish"
+default_shell "/bin/zsh"
 
 // Toggle between having pane frames around the panes
 // Options:
@@ -305,7 +305,7 @@ theme "tokyo-night-storm"
 //
 // mirror_session true
 
-default_layout "default"
+default_layout "simple"
 layout_dir  "/Users/l0calh0st/Git/l0calh0st.cn/dotfiles/zellij/layout/"
 
 // The folder in which Zellij will look for themes
