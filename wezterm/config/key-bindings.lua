@@ -74,7 +74,7 @@ return {
    },
    {
       key = "w",
-      mods = "CTRL",
+      mods = "ALT",
       action = wezterm.action({ CloseCurrentTab = { confirm = false } }),
    },
    {
