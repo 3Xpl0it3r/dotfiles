@@ -4,25 +4,23 @@ local keybindings = require("config.key-bindings")
 local launch_menu = require("config.launch-menu")
 local ssh_domains = require("config.ssh-domains")
 local shell = require("config.shell")
+
 require("config.right-status").setup()
 require("config.notify").setup()
 require("config.tab-title").setup()
 
-local font_primary = "FiraCode Nerd Font"
+local font_family = {
+	agave = "agave Nerd Font",
+    agave_mono = "agave Nerd Font Mono",
+	firacode = "FiraCode Nerd Font",
+    recursive = "Recursive",
+    comic = "Comic Code",
+}
 
-local function font(name, params)
-	return wezterm.font(name, params)
-end
-
--- [[ font with fallback ]]
--- local function font_with_fallback(name, params)
---   local names = { name }
---   return wezterm.font_with_fallback(names, params)
--- end
 
 return {
 	-- fonts
-	font = font(font_primary),
+	font = wezterm.font(font_family.comic, {bold = true}),
 	font_size = 14,
 
 	-- colour scheme
@@ -65,7 +63,7 @@ return {
 	window_close_confirmation = "NeverPrompt",
 	window_frame = {
 		active_titlebar_bg = "#090909",
-		font = font(font_primary, { bold = true }),
+		font = wezterm.font(font_family.agave, { bold = true }),
 		font_size = 9,
 	},
 	automatically_reload_config = true,
