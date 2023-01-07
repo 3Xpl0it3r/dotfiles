@@ -11,17 +11,21 @@ require("config.tab-title").setup()
 
 local font_family = {
 	agave = "agave Nerd Font",
-    agave_mono = "agave Nerd Font Mono",
+	agave_mono = "agave Nerd Font Mono",
 	firacode = "FiraCode Nerd Font",
-    recursive = "Recursive",
-    comic = "Comic Code",
+	recursive = "Recursive",
+	comic = "Comic Code",
 }
 
+wezterm.on("gui-startup", function (cmd)
+    local tab,pane,window = wezterm.mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
+end)
 
 return {
 	-- fonts
-	font = wezterm.font(font_family.comic, {bold = true}),
-	font_size = 14,
+	font = wezterm.font(font_family.agave_mono, { bold = false }),
+	font_size = 16,
 
 	-- colour scheme
 	colors = themes,
@@ -43,7 +47,7 @@ return {
 	enable_scroll_bar = true,
 
 	-- status
-	status_update_interval = 1000,
+	status_update_interval = 200,
 
 	-- tab bar
 	enable_tab_bar = true,
