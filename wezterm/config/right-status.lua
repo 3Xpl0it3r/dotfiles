@@ -11,39 +11,43 @@ local icons = {
 	date = "",
 	time = "",
 	battery = "",
+	rightpoint = "❱",
 }
 
 M.colors = {
-    date = {
-        fg = default_color.peach,
-        bg = default_color.background,
-    },
-    battery = {
-        fg = default_color.rosewater,
-        bg = default_color.background,
-
-    },
-    host = {
-        fg = default_color.ansi[5],
-        bg = default_color.background,
-    },
-    workdir = {
-        fg = default_color.ansi[6],
-        bg = default_color.background,
-    },
-    separator = {
-        fg = default_color.ansi[8],
-        bg = default_color.background,
-    },
+	date = {
+		fg = default_color.peach,
+		bg = default_color.background,
+	},
+	battery = {
+		fg = default_color.rosewater,
+		bg = default_color.background,
+	},
+	host = {
+		fg = default_color.ansi[5],
+		bg = default_color.background,
+	},
+	workdir = {
+		fg = default_color.ansi[6],
+		bg = default_color.background,
+	},
+	separator = {
+		fg = default_color.ansi[8],
+		bg = default_color.background,
+	},
 }
 
 M.cells = {} -- wezterm FormatItems (ref: https://wezfurlong.org/wezterm/config/lua/wezterm/format.html)
 
-M.push = function(text, icon, fg, bg, separate)
+M.push = function(text, icon, fg, bg, blank, separate)
 	table.insert(M.cells, { Foreground = { Color = fg } })
 	table.insert(M.cells, { Background = { Color = bg } })
 	table.insert(M.cells, { Attribute = { Intensity = "Bold" } })
-	table.insert(M.cells, { Text = icon .. " " .. text .. " " })
+	if blank then
+		table.insert(M.cells, { Text = icon .. " " .. text .. " " })
+	else
+		table.insert(M.cells, { Text = icon .. text })
+	end
 
 	if separate then
 		table.insert(M.cells, { Foreground = { Color = M.colors.separator.fg } })
@@ -79,21 +83,21 @@ M.set_work_dir = function(window, pane)
 	if not slash then
 		return
 	end
-	M.push(M.strip_home_name(cwd_uri), icons.dir, M.colors.workdir.fg, M.colors.workdir.bg, true)
+	M.push(M.strip_home_name(cwd_uri), icons.dir, M.colors.workdir.fg, M.colors.workdir.bg, true, true)
 end
 
 M.set_hostname = function()
 	local hostname = wezterm.hostname()
 
-	M.push(hostname, icons.host, M.colors.host.fg, M.colors.host.bg, true)
+	M.push(hostname, icons.host, M.colors.host.fg, M.colors.host.bg, true, true)
 end
 
 M.set_date = function()
 	local date = wezterm.strftime("%a %b %-d")
 	local time = wezterm.strftime("%H:%M")
 
-	M.push(date, icons.date, M.colors.date.fg, M.colors.date.bg, true)
-	M.push(time, icons.time, M.colors.date.fg, M.colors.date.bg, true)
+	M.push(date, icons.date, M.colors.date.fg, M.colors.date.bg, true, true)
+	M.push(time, icons.time, M.colors.date.fg, M.colors.date.bg, true, true)
 end
 
 M.set_battery = function()
@@ -115,7 +119,13 @@ M.set_battery = function()
 		end
 	end
 
-	M.push(charge, icon, M.colors.battery.fg, M.colors.battery.bg, false)
+	M.push(charge, icon, M.colors.battery.fg, M.colors.battery.bg, true, false)
+end
+
+M.set_symbol = function()
+	M.push("", icons.rightpoint, default_color.ansi[7], default_color.background, false, false)
+	M.push("", icons.rightpoint, default_color.ansi[4], default_color.background, false, false)
+	M.push("", icons.rightpoint, default_color.ansi[2], default_color.background, false, false)
 end
 
 M.setup = function()
@@ -139,6 +149,7 @@ M.setup = function()
 		M.set_work_dir(window, pane)
 		M.set_date()
 		M.set_battery()
+		M.set_symbol()
 
 		window:set_right_status(wezterm.format(M.cells))
 	end)
