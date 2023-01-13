@@ -19,6 +19,10 @@ M.colors = {
 		fg = default_color.peach,
 		bg = default_color.background,
 	},
+    time = {
+		fg = default_color.ansi[3],
+		bg = default_color.background,
+    },
 	battery = {
 		fg = default_color.rosewater,
 		bg = default_color.background,
@@ -97,7 +101,7 @@ M.set_date = function()
 	local time = wezterm.strftime("%H:%M")
 
 	M.push(date, icons.date, M.colors.date.fg, M.colors.date.bg, true, true)
-	M.push(time, icons.time, M.colors.date.fg, M.colors.date.bg, true, true)
+	M.push(time, icons.time, M.colors.time.fg, M.colors.time.bg, true, true)
 end
 
 M.set_battery = function()
