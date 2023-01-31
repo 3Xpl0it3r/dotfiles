@@ -17,34 +17,51 @@ local font_family = {
 	comic = "Comic Code",
 }
 
-wezterm.on("gui-startup", function (cmd)
-    local tab,pane,window = wezterm.mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
 end)
 
 return {
 	-- fonts
 	font = wezterm.font(font_family.agave_mono, { bold = false }),
 	font_size = 16,
+	term = "xterm-256color",
 
 	-- colour scheme
 	colors = themes,
 
 	-- background
+	--
+	window_background_image = wezterm.config_dir .. "/images/bg1.jpg",
+	window_background_image_hsb = {
+		-- Darken the background image by reducing it to 1/3rd
+		brightness = 0.3,
+
+		-- You can adjust the hue by scaling its value.
+		-- a multiplier of 1.0 leaves the value unchanged.
+		hue = 1.0,
+
+		-- You can adjust the saturation also.
+		saturation = 1.0,
+		window_background_opacity = 1.0,
+	},
 	background = {
 		--[[ {
-			source = { File = wezterm.config_dir .. "/backdrops/space.jpg" },
+			source = { File = wezterm.config_dir .. "/images/bg1.jpg" },
 		}, ]]
 		{
 			source = { Color = themes.background },
 			height = "100%",
 			width = "100%",
-			opacity = 1,
+			opacity = 0.70,
 		},
 	},
 
 	-- scroll bar
 	enable_scroll_bar = true,
+	-- How many lines of scrollback you want to retain per tab
+	scrollback_lines = 10000,
 
 	-- status
 	status_update_interval = 200,
