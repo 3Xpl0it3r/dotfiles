@@ -22,9 +22,11 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
+
+
 return {
 	-- fonts
-	font = wezterm.font(font_family.agave_mono, { bold = false }),
+	font = wezterm.font(font_family.agave_mono, { bold = true }),
 	font_size = 16,
 	term = "xterm-256color",
 
@@ -33,7 +35,8 @@ return {
 
 	-- background
 	--
-	window_background_image = wezterm.config_dir .. "/images/bg1.jpg",
+	-- window_background_opacity = 1.0,
+	-- window_background_image = wezterm.config_dir .. "/images/bg1.jpg",
 	window_background_image_hsb = {
 		-- Darken the background image by reducing it to 1/3rd
 		brightness = 0.3,
@@ -44,17 +47,17 @@ return {
 
 		-- You can adjust the saturation also.
 		saturation = 1.0,
-		window_background_opacity = 1.0,
 	},
 	background = {
-		--[[ {
-			source = { File = wezterm.config_dir .. "/images/bg1.jpg" },
-		}, ]]
+		{
+			source = { File = wezterm.config_dir .. "/images/bg" .. 6 ..".jpg" },
+		},
 		{
 			source = { Color = themes.background },
 			height = "100%",
 			width = "100%",
-			opacity = 0.70,
+			opacity = 0.80,
+			horizontal_align = "Center",
 		},
 	},
 
