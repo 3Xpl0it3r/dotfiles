@@ -5,7 +5,7 @@ local launch_menu = require("config.launch-menu")
 local ssh_domains = require("config.ssh-domains")
 local shell = require("config.shell")
 
-require("config.right-status").setup()
+-- require("config.right-status").setup()
 require("config.notify").setup()
 require("config.tab-title").setup()
 
@@ -26,8 +26,8 @@ end)
 
 return {
 	-- fonts
-	font = wezterm.font(font_family.agave_mono, { bold = true }),
-	font_size = 16,
+	font = wezterm.font(font_family.recursive, { bold = true }),
+	font_size = 14,
 	term = "xterm-256color",
 
 	-- colour scheme
@@ -49,14 +49,14 @@ return {
 		saturation = 1.0,
 	},
 	background = {
-		{
-			source = { File = wezterm.config_dir .. "/images/bg" .. 6 ..".jpg" },
-		},
+		--[[ {
+			source = { File = wezterm.config_dir .. "/images/bg" .. 3 ..".jpg" },
+		}, ]]
 		{
 			source = { Color = themes.background },
 			height = "100%",
 			width = "100%",
-			opacity = 0.80,
+			opacity = 1.0,
 			horizontal_align = "Center",
 		},
 	},

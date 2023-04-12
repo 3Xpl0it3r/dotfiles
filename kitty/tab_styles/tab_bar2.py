@@ -25,6 +25,16 @@ icon_bg = as_rgb(color_as_int(opts.color8))
 
 ICON = "  "
 
+ICONS = {
+    "icon": "  ",
+    "host": " ",
+    "dir": " ",
+    "date": " ",
+    "time": " ",
+    "battery": "",
+    "rightpoint": "❱",
+}
+
 def _draw_icon(screen: Screen, index: int) -> int:
     if index != 1:
         return 0
@@ -98,8 +108,8 @@ def create_cells() -> list[str]:
     return [
         currently_playing(),
         get_headphone_battery_status(),
-        "CreateAt: " + now.strftime("%H:%M:%S"),
-        now.strftime("%Y:%m:%d"),
+        ICONS.get("date") + now.strftime("%H:%M:%S"),
+        # now.strftime("%Y:%m:%d"),
     ]
 
 
@@ -117,6 +127,8 @@ def get_headphone_battery_status():
 
 
 STATE = defaultdict(lambda: "", {"Paused": "", "Playing": ""})
+
+
 
 
 def currently_playing():
