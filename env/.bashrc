@@ -1,5 +1,8 @@
 set -o vi
 
+export PATH=$PATH:/opt/homebrew/bin
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.sh
 
 ####################################################################
 #                  Git                                             #

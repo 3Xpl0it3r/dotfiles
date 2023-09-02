@@ -26,7 +26,7 @@ end)
 
 return {
 	-- fonts
-	font = wezterm.font(font_family.recursive, { bold = true }),
+	font = wezterm.font(font_family.firacode, { bold = true }),
 	font_size = 14,
 	term = "xterm-256color",
 
