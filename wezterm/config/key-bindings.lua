@@ -2,15 +2,15 @@ local wezterm = require("wezterm")
 
 return {
    {
-      key = [[\]],
-      mods = "CTRL|ALT",
+      key = "h",
+      mods = "ALT",
       action = wezterm.action({
          SplitHorizontal = { domain = "CurrentPaneDomain" },
       }),
    },
    {
-      key = [[\]],
-      mods = "CTRL",
+      key = "d",
+      mods = "ALT",
       action = wezterm.action({
          SplitVertical = { domain = "CurrentPaneDomain" },
       }),
@@ -18,7 +18,7 @@ return {
    {
       key = "q",
       mods = "CTRL",
-      action = wezterm.action({ CloseCurrentPane = { confirm = false } }),
+      action = wezterm.action({ CloseCurrentPane = { confirm = true } }),
    },
    {
       key = "h",
@@ -75,7 +75,7 @@ return {
    {
       key = "w",
       mods = "ALT",
-      action = wezterm.action({ CloseCurrentTab = { confirm = false } }),
+      action = wezterm.action({ CloseCurrentTab = { confirm = true } }),
    },
    {
       key = "Tab",

@@ -6,7 +6,7 @@ local ssh_domains = require("config.ssh-domains")
 local shell = require("config.shell")
 
 -- require("config.right-status").setup()
-require("config.notify").setup()
+-- require("config.notify").setup()
 require("config.tab-title").setup()
 
 local font_family = {
@@ -33,30 +33,15 @@ return {
 	-- colour scheme
 	colors = themes,
 
-	-- background
-	--
-	-- window_background_opacity = 1.0,
-	-- window_background_image = wezterm.config_dir .. "/images/bg1.jpg",
-	window_background_image_hsb = {
-		-- Darken the background image by reducing it to 1/3rd
-		brightness = 0.3,
-
-		-- You can adjust the hue by scaling its value.
-		-- a multiplier of 1.0 leaves the value unchanged.
-		hue = 1.0,
-
-		-- You can adjust the saturation also.
-		saturation = 1.0,
-	},
 	background = {
-		--[[ {
-			source = { File = wezterm.config_dir .. "/images/bg" .. 3 ..".jpg" },
-		}, ]]
+		{
+			source = { File = wezterm.config_dir .. "/images/bg" .. 18 ..".jpg" },
+		},
 		{
 			source = { Color = themes.background },
 			height = "100%",
 			width = "100%",
-			opacity = 1.0,
+			opacity = 0.8,
 			horizontal_align = "Center",
 		},
 	},
@@ -84,7 +69,7 @@ return {
 		top = 12,
 		bottom = 7,
 	},
-	window_close_confirmation = "NeverPrompt",
+	window_close_confirmation = "AlwaysPrompt",
 	window_frame = {
 		active_titlebar_bg = "#090909",
 		font = wezterm.font(font_family.agave, { bold = true }),
