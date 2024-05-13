@@ -2,11 +2,10 @@ local wezterm = require("wezterm")
 local themes = require("themes.custom")
 local keybindings = require("config.key-bindings")
 local launch_menu = require("config.launch-menu")
-local ssh_domains = require("config.ssh-domains")
 local shell = require("config.shell")
 
--- require("config.right-status").setup()
--- require("config.notify").setup()
+require("config.right-status").setup()
+require("config.notify").setup()
 require("config.tab-title").setup()
 
 local font_family = {
@@ -22,8 +21,6 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
-
-
 return {
 	-- fonts
 	font = wezterm.font(font_family.firacode, { bold = true }),
@@ -35,7 +32,7 @@ return {
 
 	background = {
 		{
-			source = { File = wezterm.config_dir .. "/images/bg" .. 18 ..".jpg" },
+			source = { File = wezterm.config_dir .. "/images/bg" .. 18 .. ".jpg" },
 		},
 		{
 			source = { Color = themes.background },
@@ -97,8 +94,6 @@ return {
 	default_prog = shell,
 	launch_menu = launch_menu,
 
-	-- ssh
-	ssh_domains = ssh_domains,
 
 	-- wsl
 	wsl_domains = {

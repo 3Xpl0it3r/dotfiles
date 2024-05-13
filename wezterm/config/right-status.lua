@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
 local lume = require("utils.lume")
 local default_color = require("themes.colors.tokyonight")
+
+local nf = wezterm.nerdfonts
 local M = {}
 
 M.separator_char = " "
@@ -9,8 +11,8 @@ local icons = {
 	host = "",
 	dir = "",
 	date = "",
-	time = "",
-	battery = "",
+	time = "",
+	battery = " ",
 	rightpoint = "❱",
 }
 
@@ -19,10 +21,10 @@ M.colors = {
 		fg = default_color.peach,
 		bg = default_color.background,
 	},
-    time = {
+	time = {
 		fg = default_color.ansi[3],
 		bg = default_color.background,
-    },
+	},
 	battery = {
 		fg = default_color.rosewater,
 		bg = default_color.background,
@@ -74,22 +76,6 @@ M.strip_home_name = function(text)
 	return text
 end
 
-M.set_work_dir = function(window, pane)
-	local uri = pane:get_current_working_dir()
-
-	if not uri then
-		return
-	end
-
-	local cwd_uri = uri:sub(8)
-	local slash = cwd_uri:find("/")
-
-	if not slash then
-		return
-	end
-	M.push(M.strip_home_name(cwd_uri), icons.dir, M.colors.workdir.fg, M.colors.workdir.bg, true, true)
-end
-
 M.set_hostname = function()
 	local hostname = wezterm.hostname()
 
@@ -105,9 +91,30 @@ M.set_date = function()
 end
 
 M.set_battery = function()
-	-- ref: https://wezfurlong.org/wezterm/config/lua/wezterm/battery_info.html
-	local discharging_icons = { "", "", "", "", "", "", "", "", "", "" }
-	local charging_icons = { "", "", "", "", "", "", "", "", "", "" }
+	local discharging_icons = {
+		nf.md_battery_10,
+		nf.md_battery_20,
+		nf.md_battery_30,
+		nf.md_battery_40,
+		nf.md_battery_50,
+		nf.md_battery_60,
+		nf.md_battery_70,
+		nf.md_battery_80,
+		nf.md_battery_90,
+		nf.md_battery,
+	}
+	local charging_icons = {
+		nf.md_battery_charging_10,
+		nf.md_battery_charging_20,
+		nf.md_battery_charging_30,
+		nf.md_battery_charging_40,
+		nf.md_battery_charging_50,
+		nf.md_battery_charging_60,
+		nf.md_battery_charging_70,
+		nf.md_battery_charging_80,
+		nf.md_battery_charging_90,
+		nf.md_battery_charging,
+	}
 
 	local charge = ""
 	local icon = ""
@@ -133,24 +140,8 @@ M.set_symbol = function()
 end
 
 M.setup = function()
-	wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
-		local zoomed = ""
-		if tab.active_pane.is_zoomed then
-			zoomed = "[Z] "
-		end
-
-		local index = ""
-		if #tabs > 1 then
-			index = string.format("[%d/%d] ", tab.tab_index + 1, #tabs)
-		end
-
-		local clean_title = M.strip_home_name(tab.active_pane.title)
-		return zoomed .. index .. clean_title
-	end)
 	wezterm.on("update-right-status", function(window, pane)
 		M.cells = {}
-		M.set_hostname()
-		M.set_work_dir(window, pane)
 		M.set_date()
 		M.set_battery()
 		M.set_symbol()
