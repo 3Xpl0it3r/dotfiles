@@ -30,8 +30,8 @@ ICONS = {
     "host": " ",
     "dir": " ",
     "date": " ",
-    "time": " ",
-    "battery": "",
+    "time": " ",
+    "battery": " ",
     "rightpoint": "❱",
 }
 
@@ -117,13 +117,13 @@ def get_headphone_battery_status():
     try:
         battery_pct = int(subprocess.getoutput("headsetcontrol -b -c"))
     except Exception:
-        status = ""
+        status = " "
     else:
         if battery_pct < 0:
-            status = ""
+            status = " "
         else:
-            status = f"{battery_pct}% {''[battery_pct // 10]}"
-    return f" {status}"
+            status = f"{battery_pct}% {'󰂄'[battery_pct // 10]}"
+    return f"󰂄 {status}"
 
 
 STATE = defaultdict(lambda: "", {"Paused": "", "Playing": ""})
@@ -148,7 +148,7 @@ def currently_playing():
         if "artist" in data:
             status = f"{status} - {data['artist']}"
     else:
-        status = ""
+        status = ""
     return status
 
 
